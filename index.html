@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Proposal for PJ's Tree Service — Outfox Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-dark: #1a1a1a;
+      --gray-mid: #4a4a4a;
+      --gray-light: #f2f2f2;
+      --border: #e0e0e0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      background: var(--white);
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Section base ── */
+    section { width: 100%; }
+    .section-inner { padding: 80px 24px; max-width: 880px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #hero {
+      background: var(--black);
+      color: var(--white);
+    }
+    #hero .section-inner {
+      padding-top: 72px;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .hero-logo img {
+      height: 72px;
+      width: auto;
+      display: block;
+    }
+    .hero-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+    .hero-headline {
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      max-width: 780px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.65);
+      max-width: 600px;
+      margin-top: 16px;
+    }
+    .hero-divider {
+      width: 48px;
+      height: 3px;
+      background: rgba(255,255,255,0.2);
+      margin-top: 8px;
+    }
+
+    /* ── PROBLEM ── */
+    #problem { background: var(--white); }
+    .section-heading {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 48px;
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .problem-item {
+      border-top: 2px solid var(--border);
+      padding-top: 28px;
+    }
+    .problem-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.3);
+      margin-bottom: 12px;
+    }
+    .problem-item p {
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--gray-mid);
+    }
+
+    /* ── DEMO ── */
+    #demo {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+    }
+    #demo .section-inner { padding-top: 88px; padding-bottom: 88px; }
+    .demo-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+    }
+    #demo .section-heading {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .demo-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      max-width: 540px;
+      margin: 0 auto 56px;
+      line-height: 1.65;
+    }
+    .demo-number-wrap {
+      margin-bottom: 32px;
+    }
+    .demo-number {
+      display: inline-block;
+      font-size: clamp(42px, 8vw, 72px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 4px solid rgba(255,255,255,0.2);
+      padding-bottom: 8px;
+      transition: border-color 0.2s;
+    }
+    .demo-number:hover { border-color: rgba(255,255,255,0.6); }
+    .demo-tap-hint {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.35);
+      margin-top: 12px;
+      letter-spacing: 0.04em;
+    }
+    .demo-explainer {
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── OFFER ── */
+    #offer { background: var(--gray-light); }
+    .offer-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 12px;
+    }
+    .offer-heading {
+      font-size: clamp(32px, 5vw, 50px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .offer-subheading {
+      font-size: 17px;
+      color: var(--gray-mid);
+      margin-bottom: 56px;
+      line-height: 1.6;
+    }
+    .deliverables { display: flex; flex-direction: column; gap: 2px; }
+    .deliverable {
+      background: var(--white);
+      padding: 36px 40px;
+    }
+    .deliverable-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .deliverable-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+    .deliverable-outcome {
+      font-size: 15px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gray-mid);
+      margin-bottom: 20px;
+    }
+    .deliverable-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .deliverable-list li {
+      font-size: 15px;
+      color: var(--gray-mid);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .deliverable-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: rgba(0,0,0,0.25);
+      font-weight: 400;
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--white); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 48px;
+    }
+    .price-card {
+      background: var(--gray-light);
+      padding: 36px 40px;
+    }
+    .price-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 12px;
+    }
+    .price-amount {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-note {
+      font-size: 14px;
+      color: var(--gray-mid);
+    }
+    .roi-block {
+      background: var(--gray-light);
+      padding: 36px 40px;
+      margin-bottom: 48px;
+    }
+    .roi-block p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--gray-mid);
+    }
+    .guarantee-heading {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+    .guarantee-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .guarantee-list li {
+      font-size: 16px;
+      color: var(--gray-mid);
+      padding-left: 24px;
+      position: relative;
+      line-height: 1.65;
+    }
+    .guarantee-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    /* ── CLOSE ── */
+    #close {
+      background: var(--black);
+      color: var(--white);
+    }
+    #close .section-inner { padding-top: 88px; padding-bottom: 88px; }
+    #close .section-heading {
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .close-body {
+      font-size: 18px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.7);
+      max-width: 620px;
+      margin-bottom: 32px;
+    }
+    .close-sig {
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    footer .section-inner {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-brand {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .footer-contact {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      text-align: right;
+      line-height: 1.7;
+    }
+    .footer-contact a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+    }
+    .footer-contact a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .section-inner { padding: 60px 20px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .deliverable { padding: 28px 24px; }
+      .price-card { padding: 28px 24px; }
+      .roi-block { padding: 28px 24px; }
+      footer .section-inner { flex-direction: column; align-items: flex-start; }
+      .footer-contact { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section id="hero">
+    <div class="section-inner">
+      <div class="hero-logo">
+        <img src="logo.png" alt="PJ's Tree Service" />
+      </div>
+      <div>
+        <p class="hero-label">A proposal prepared for Josh Allen by Outfox Consulting</p>
+        <h1 class="hero-headline">Your business keeps running — even when you're 60 feet up in a tree.</h1>
+        <p class="hero-sub">A done-for-you system that captures every lead, follows up every quote, and fills your schedule — automatically.</p>
+      </div>
+      <div class="hero-divider"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ PROBLEM ═════════════════════════════ -->
+  <section id="problem">
+    <div class="section-inner">
+      <h2 class="section-heading">Here's what's costing you jobs right now.</h2>
+      <div class="problem-grid">
+
+        <div class="problem-item">
+          <p class="problem-number">01</p>
+          <p>You're running a saw 40 feet up and your phone buzzes. Someone needs a quote. By the time you get back to them that night, they've already called someone else.</p>
+        </div>
+
+        <div class="problem-item">
+          <p class="problem-number">02</p>
+          <p>You sent a thorough quote — cleanup included, stump grinding priced separately, everything they asked. No response. You meant to follow up but the next job was already waiting.</p>
+        </div>
+
+        <div class="problem-item">
+          <p class="problem-number">03</p>
+          <p>You need 15 jobs a week to keep the crew busy. Most weeks you hit it. But you have no idea what next month looks like — and that uncertainty doesn't go away.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ DEMO ═════════════════════════════ -->
+  <section id="demo">
+    <div class="section-inner">
+      <p class="demo-label">Live Demo</p>
+      <h2 class="section-heading">Hear it for yourself.</h2>
+      <p class="demo-sub">Call this number right now. This is exactly what your customers will experience when they reach out while you're on a job.</p>
+      <div class="demo-number-wrap">
+        <a class="demo-number" href="tel:4069267130">406-926-7130</a>
+        <p class="demo-tap-hint">Tap to call on mobile</p>
+      </div>
+      <p class="demo-explainer">An AI assistant answers, takes their information, checks rough availability, and lets them know you'll be in touch. No missed leads. No one left waiting.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ OFFER ════════════════════════════ -->
+  <section id="offer">
+    <div class="section-inner">
+      <p class="offer-label">The Offer</p>
+      <h2 class="offer-heading">The Background Office</h2>
+      <p class="offer-subheading">A complete done-for-you system built specifically for PJ's Tree Service.</p>
+
+      <div class="deliverables">
+
+        <div class="deliverable">
+          <div class="deliverable-header">
+            <span class="deliverable-name">The Command Center</span>
+          </div>
+          <p class="deliverable-outcome">Every customer, every lead, every job — in one place.</p>
+          <ul class="deliverable-list">
+            <li>Single contact record for every customer and lead — name, number, address, job history</li>
+            <li>Two dedicated pipelines — new leads and past customers — nothing gets mixed or lost</li>
+            <li>Dedicated local Missoula business phone number</li>
+            <li>Both existing numbers forwarded — customers keep calling the same numbers they always have</li>
+            <li>Full visibility into where every lead and job stands at a glance</li>
+          </ul>
+        </div>
+
+        <div class="deliverable">
+          <div class="deliverable-header">
+            <span class="deliverable-name">The Always-On Answering System</span>
+          </div>
+          <p class="deliverable-outcome">The moment someone reaches out, they get a response — even when you're 60 feet up in a tree.</p>
+          <ul class="deliverable-list">
+            <li>Instant automated response to every inbound text — fires in under 60 seconds</li>
+            <li>Missed call acknowledgment — anyone who doesn't get through receives an immediate text back</li>
+            <li>Every new contact automatically captured as a lead record — no manual data entry</li>
+            <li>Stops leads from going cold while you're on the job</li>
+          </ul>
+        </div>
+
+        <div class="deliverable">
+          <div class="deliverable-header">
+            <span class="deliverable-name">The Follow-Up Machine</span>
+          </div>
+          <p class="deliverable-outcome">Every quote you send gets followed up automatically.</p>
+          <ul class="deliverable-list">
+            <li>Automatic follow-up sent on every unseen estimate at 48–72 hours</li>
+            <li>Professionally worded — sounds like Josh, not a robot</li>
+            <li>Stops automatically once the customer responds</li>
+            <li>Recovers jobs that would have gone to a competitor simply because no one followed up</li>
+          </ul>
+        </div>
+
+        <div class="deliverable">
+          <div class="deliverable-header">
+            <span class="deliverable-name">The Reactivation Engine</span>
+          </div>
+          <p class="deliverable-outcome">Your eight years of customers become a scheduling pipeline you can activate anytime.</p>
+          <ul class="deliverable-list">
+            <li>Full past customer list extracted, cleaned, and imported — ready to use</li>
+            <li>Reactivation campaign template built and ready to fire on demand</li>
+            <li>Fill scheduling gaps weeks out with one broadcast to people who already trust you</li>
+            <li>Seasonal and ad-hoc campaigns ready to deploy anytime</li>
+          </ul>
+        </div>
+
+        <div class="deliverable">
+          <div class="deliverable-header">
+            <span class="deliverable-name">The Done-With-You Setup</span>
+          </div>
+          <p class="deliverable-outcome">One call. Everything else is handled.</p>
+          <ul class="deliverable-list">
+            <li>Full system built and tested before Josh touches anything</li>
+            <li>Onboarding call — everything walked through together, nothing left unexplained</li>
+            <li>Phone forwarding configured live on the call</li>
+            <li>Contact list export handled together</li>
+            <li>System live and taking real leads within the first few days</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ PRICING ════════════════════════════ -->
+  <section id="pricing">
+    <div class="section-inner">
+      <h2 class="section-heading">Simple, transparent pricing.</h2>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <p class="price-label">Setup Fee</p>
+          <p class="price-amount">$1,500</p>
+          <p class="price-note">One time</p>
+        </div>
+        <div class="price-card">
+          <p class="price-label">Monthly Retainer</p>
+          <p class="price-amount">$500</p>
+          <p class="price-note">Per month</p>
+        </div>
+      </div>
+
+      <div class="roi-block">
+        <p>A single tree removal averages $1,825. If this system recovers one job a month that would have otherwise gone cold — one unanswered text, one estimate nobody followed up on — it pays for itself three times over before the end of the month.</p>
+      </div>
+
+      <p class="guarantee-heading">Our Commitment</p>
+      <ul class="guarantee-list">
+        <li>System live within 10 business days of your onboarding call — or your first month is free</li>
+        <li>Every deliverable tested and confirmed working before handoff</li>
+        <li>Any issue after go-live receives a response within one business day</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════ CLOSE ═══════════════════════════ -->
+  <section id="close">
+    <div class="section-inner">
+      <h2 class="section-heading">Looking forward to Tuesday.</h2>
+      <p class="close-body">We've got a call scheduled for Tuesday morning at 9:00 AM. Come with questions — that's what it's for. Everything above will be ready to walk through together, and we'll make sure the system we build is exactly right for how you work.</p>
+      <p class="close-sig">— Travis Smith, Outfox Consulting</p>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════ FOOTER ══════════════════════════ -->
+  <footer>
+    <div class="section-inner">
+      <span class="footer-brand">Outfox Consulting</span>
+      <div class="footer-contact">
+        <a href="mailto:travis@outfoxconsult.com">travis@outfoxconsult.com</a><br />
+        <a href="https://outfoxconsult.com" target="_blank" rel="noopener">outfoxconsult.com</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
