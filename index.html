@@ -11,12 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #0a0a0a;
-      --white: #ffffff;
-      --gray-dark: #1a1a1a;
-      --gray-mid: #4a4a4a;
-      --gray-light: #f2f2f2;
-      --border: #e0e0e0;
+      --black:       #0d0d0b;
+      --charcoal:    #1e1e1a;
+      --white:       #ffffff;
+      --off-white:   #f8f7f4;
+      --gray-dark:   #2a2a26;
+      --gray-mid:    #5a5a52;
+      --gray-light:  #eeede8;
+      --border:      #dddbd4;
+      --orange:      #E8621A;
+      --orange-dark: #c44f12;
+      --orange-pale: #fdf1ea;
     }
 
     html { scroll-behavior: smooth; }
@@ -29,326 +34,368 @@
       background: var(--white);
     }
 
-    /* ── Layout ── */
-    .container {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 24px;
+    /* ── Edit toolbar ── */
+    #edit-bar {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      background: var(--charcoal);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    #edit-bar .edit-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    #edit-bar button {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      padding: 7px 14px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    #edit-bar button:hover { opacity: 0.85; }
+    #btn-save    { background: var(--orange); color: #fff; }
+    #btn-download { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+    #btn-reset   { background: transparent; color: rgba(255,255,255,0.35); font-size: 12px; padding: 7px 8px; }
+    #save-confirm {
+      font-size: 12px;
+      color: #6fcf97;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    /* contenteditable styling */
+    [contenteditable]:focus {
+      outline: 2px solid var(--orange);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+    [contenteditable]:hover:not(:focus) {
+      outline: 1px dashed rgba(232,98,26,0.4);
+      outline-offset: 3px;
+      border-radius: 3px;
     }
 
     /* ── Section base ── */
     section { width: 100%; }
-    .section-inner { padding: 80px 24px; max-width: 880px; margin: 0 auto; }
+    .section-inner { padding: 88px 24px; max-width: 900px; margin: 0 auto; }
 
-    /* ── HERO ── */
-    #hero {
-      background: var(--black);
-      color: var(--white);
-    }
+    /* ════════════ HERO ════════════ */
+    #hero { background: var(--black); }
     #hero .section-inner {
-      padding-top: 72px;
+      padding-top: 64px;
       padding-bottom: 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
+    }
+
+    .hero-logo {
+      margin-bottom: 52px;
     }
     .hero-logo img {
-      height: 72px;
+      height: 140px;
       width: auto;
       display: block;
     }
+
     .hero-label {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 16px;
+      color: var(--orange);
+      margin-bottom: 20px;
     }
+
     .hero-headline {
-      font-size: clamp(36px, 6vw, 58px);
+      font-size: clamp(38px, 6.5vw, 62px);
       font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
       color: var(--white);
-      max-width: 780px;
+      max-width: 820px;
+      margin-bottom: 24px;
     }
+
     .hero-sub {
       font-size: 18px;
       font-weight: 400;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.65);
-      max-width: 600px;
-      margin-top: 16px;
-    }
-    .hero-divider {
-      width: 48px;
-      height: 3px;
-      background: rgba(255,255,255,0.2);
-      margin-top: 8px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+      max-width: 580px;
     }
 
-    /* ── PROBLEM ── */
-    #problem { background: var(--white); }
+    .hero-rule {
+      width: 56px;
+      height: 4px;
+      background: var(--orange);
+      margin-top: 48px;
+      border-radius: 2px;
+    }
+
+    /* ════════════ PROBLEM ════════════ */
+    #problem { background: var(--off-white); }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
     .section-heading {
-      font-size: clamp(28px, 4vw, 40px);
+      font-size: clamp(28px, 4.5vw, 42px);
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.12;
       letter-spacing: -0.02em;
       color: var(--black);
-      margin-bottom: 48px;
+      margin-bottom: 52px;
     }
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
+
+    .problem-grid { display: flex; flex-direction: column; gap: 0; }
+
     .problem-item {
-      border-top: 2px solid var(--border);
-      padding-top: 28px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 24px;
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
     }
-    .problem-number {
+    .problem-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .problem-num {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: 0.04em;
+      padding-top: 3px;
+    }
+
+    .problem-item p {
+      font-size: 17px;
+      line-height: 1.78;
+      color: var(--gray-mid);
+    }
+
+    /* ════════════ DEMO ════════════ */
+    #demo { background: var(--charcoal); text-align: center; }
+    #demo .section-inner { padding-top: 96px; padding-bottom: 96px; }
+
+    #demo .section-eyebrow { color: var(--orange); }
+
+    #demo .section-heading {
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .demo-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.55);
+      max-width: 520px;
+      margin: 0 auto 60px;
+      line-height: 1.7;
+    }
+
+    .demo-phone-wrap { margin-bottom: 8px; }
+
+    .demo-number {
+      display: inline-block;
+      font-size: clamp(46px, 9vw, 76px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      color: var(--orange);
+      text-decoration: none;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .demo-number:hover { color: var(--orange-dark); }
+
+    .demo-tap {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+      margin-top: 10px;
+      margin-bottom: 44px;
+    }
+
+    .demo-explainer {
+      font-size: 15px;
+      color: rgba(255,255,255,0.42);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ════════════ OFFER ════════════ */
+    #offer { background: var(--gray-light); }
+
+    .offer-intro { margin-bottom: 48px; }
+    .offer-name {
+      font-size: clamp(34px, 5.5vw, 54px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+    .offer-tagline {
+      font-size: 17px;
+      color: var(--gray-mid);
+      line-height: 1.6;
+    }
+
+    .deliverables { display: flex; flex-direction: column; gap: 3px; }
+
+    .deliverable {
+      background: var(--white);
+      padding: 36px 40px 36px 36px;
+      border-left: 4px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .deliverable:hover { border-left-color: var(--orange); }
+
+    .d-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .d-outcome {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--orange);
+      font-weight: 500;
+      margin-bottom: 18px;
+    }
+    .d-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .d-list li {
+      font-size: 15px;
+      color: var(--gray-mid);
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .d-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    /* ════════════ PRICING ════════════ */
+    #pricing { background: var(--white); }
+
+    .price-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      margin-bottom: 40px;
+    }
+    .price-card {
+      background: var(--off-white);
+      padding: 36px 40px;
+      border-top: 4px solid var(--orange);
+    }
+    .price-card-label {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.3);
-      margin-bottom: 12px;
-    }
-    .problem-item p {
-      font-size: 17px;
-      font-weight: 400;
-      line-height: 1.75;
       color: var(--gray-mid);
-    }
-
-    /* ── DEMO ── */
-    #demo {
-      background: var(--black);
-      color: var(--white);
-      text-align: center;
-    }
-    #demo .section-inner { padding-top: 88px; padding-bottom: 88px; }
-    .demo-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 24px;
-    }
-    #demo .section-heading {
-      color: var(--white);
-      margin-bottom: 16px;
-    }
-    .demo-sub {
-      font-size: 17px;
-      color: rgba(255,255,255,0.6);
-      max-width: 540px;
-      margin: 0 auto 56px;
-      line-height: 1.65;
-    }
-    .demo-number-wrap {
-      margin-bottom: 32px;
-    }
-    .demo-number {
-      display: inline-block;
-      font-size: clamp(42px, 8vw, 72px);
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      text-decoration: none;
-      border-bottom: 4px solid rgba(255,255,255,0.2);
-      padding-bottom: 8px;
-      transition: border-color 0.2s;
-    }
-    .demo-number:hover { border-color: rgba(255,255,255,0.6); }
-    .demo-tap-hint {
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.35);
-      margin-top: 12px;
-      letter-spacing: 0.04em;
-    }
-    .demo-explainer {
-      font-size: 15px;
-      color: rgba(255,255,255,0.45);
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ── OFFER ── */
-    #offer { background: var(--gray-light); }
-    .offer-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.35);
-      margin-bottom: 12px;
-    }
-    .offer-heading {
-      font-size: clamp(32px, 5vw, 50px);
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      color: var(--black);
-      margin-bottom: 8px;
-    }
-    .offer-subheading {
-      font-size: 17px;
-      color: var(--gray-mid);
-      margin-bottom: 56px;
-      line-height: 1.6;
-    }
-    .deliverables { display: flex; flex-direction: column; gap: 2px; }
-    .deliverable {
-      background: var(--white);
-      padding: 36px 40px;
-    }
-    .deliverable-header {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 6px;
-      flex-wrap: wrap;
-    }
-    .deliverable-name {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--black);
-      letter-spacing: -0.01em;
-    }
-    .deliverable-outcome {
-      font-size: 15px;
-      font-weight: 400;
-      font-style: italic;
-      color: var(--gray-mid);
-      margin-bottom: 20px;
-    }
-    .deliverable-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .deliverable-list li {
-      font-size: 15px;
-      color: var(--gray-mid);
-      padding-left: 20px;
-      position: relative;
-      line-height: 1.6;
-    }
-    .deliverable-list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: rgba(0,0,0,0.25);
-      font-weight: 400;
-    }
-
-    /* ── PRICING ── */
-    #pricing { background: var(--white); }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-bottom: 48px;
-    }
-    .price-card {
-      background: var(--gray-light);
-      padding: 36px 40px;
-    }
-    .price-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.4);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .price-amount {
-      font-size: clamp(36px, 5vw, 52px);
+      font-size: clamp(38px, 5.5vw, 54px);
       font-weight: 900;
-      color: var(--black);
       letter-spacing: -0.03em;
+      color: var(--black);
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
-    .price-note {
-      font-size: 14px;
-      color: var(--gray-mid);
-    }
+    .price-note { font-size: 14px; color: var(--gray-mid); }
+
     .roi-block {
-      background: var(--gray-light);
-      padding: 36px 40px;
+      background: var(--orange-pale);
+      border-left: 4px solid var(--orange);
+      padding: 28px 32px;
       margin-bottom: 48px;
+      border-radius: 0 4px 4px 0;
     }
     .roi-block p {
-      font-size: 17px;
-      line-height: 1.75;
-      color: var(--gray-mid);
+      font-size: 16px;
+      line-height: 1.78;
+      color: #5a3010;
     }
-    .guarantee-heading {
-      font-size: 14px;
+
+    .guarantee-label {
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(0,0,0,0.4);
+      color: var(--orange);
       margin-bottom: 20px;
     }
-    .guarantee-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .guarantee-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
     .guarantee-list li {
       font-size: 16px;
       color: var(--gray-mid);
-      padding-left: 24px;
+      padding-left: 28px;
       position: relative;
-      line-height: 1.65;
+      line-height: 1.6;
     }
     .guarantee-list li::before {
       content: '✓';
       position: absolute;
       left: 0;
-      font-weight: 700;
-      color: var(--black);
+      font-weight: 800;
+      color: var(--orange);
     }
 
-    /* ── CLOSE ── */
-    #close {
-      background: var(--black);
-      color: var(--white);
-    }
-    #close .section-inner { padding-top: 88px; padding-bottom: 88px; }
-    #close .section-heading {
-      color: var(--white);
-      margin-bottom: 28px;
-    }
+    /* ════════════ CLOSE ════════════ */
+    #close { background: var(--black); }
+    #close .section-inner { padding-top: 96px; padding-bottom: 96px; }
+    #close .section-heading { color: var(--white); margin-bottom: 28px; }
+
     .close-body {
       font-size: 18px;
       line-height: 1.8;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.6);
       max-width: 620px;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
     .close-sig {
       font-size: 15px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.4);
+      font-weight: 600;
+      color: var(--orange);
     }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--black);
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
+    /* ════════════ FOOTER ════════════ */
+    footer { background: var(--charcoal); border-top: 1px solid rgba(255,255,255,0.07); }
     footer .section-inner {
-      padding-top: 40px;
-      padding-bottom: 40px;
+      padding-top: 36px;
+      padding-bottom: 36px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -356,164 +403,157 @@
       gap: 16px;
     }
     .footer-brand {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       color: var(--white);
       letter-spacing: -0.01em;
     }
     .footer-contact {
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
       text-align: right;
       line-height: 1.7;
     }
-    .footer-contact a {
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-    }
-    .footer-contact a:hover { color: rgba(255,255,255,0.7); }
+    .footer-contact a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-contact a:hover { color: var(--orange); }
 
-    /* ── Mobile ── */
+    /* ════════════ Mobile ════════════ */
     @media (max-width: 640px) {
-      .section-inner { padding: 60px 20px; }
-      .pricing-grid { grid-template-columns: 1fr; }
+      .section-inner { padding: 64px 20px; }
+      .hero-logo img { height: 100px; }
+      .price-cards { grid-template-columns: 1fr; }
       .deliverable { padding: 28px 24px; }
       .price-card { padding: 28px 24px; }
-      .roi-block { padding: 28px 24px; }
       footer .section-inner { flex-direction: column; align-items: flex-start; }
       .footer-contact { text-align: left; }
+      #edit-bar { bottom: 12px; right: 12px; left: 12px; flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <!-- ══════════════ EDIT TOOLBAR ══════════════ -->
+  <div id="edit-bar">
+    <span class="edit-label">✏ Edit mode</span>
+    <span id="save-confirm">Saved</span>
+    <button id="btn-save" onclick="saveEdits()">Save</button>
+    <button id="btn-download" onclick="downloadHtml()">Download HTML</button>
+    <button id="btn-reset" onclick="resetEdits()">Reset</button>
+  </div>
+
+  <!-- ══════════════ HERO ══════════════ -->
   <section id="hero">
     <div class="section-inner">
       <div class="hero-logo">
         <img src="logo.png" alt="PJ's Tree Service" />
       </div>
-      <div>
-        <p class="hero-label">A proposal prepared for Josh Allen by Outfox Consulting</p>
-        <h1 class="hero-headline">Your business keeps running — even when you're 60 feet up in a tree.</h1>
-        <p class="hero-sub">A done-for-you system that captures every lead, follows up every quote, and fills your schedule — automatically.</p>
-      </div>
-      <div class="hero-divider"></div>
+      <p class="section-eyebrow" data-edit="hero-label" contenteditable="true">A proposal prepared for Josh Allen by Outfox Consulting</p>
+      <h1 class="hero-headline" data-edit="hero-headline" contenteditable="true">Your business keeps running — even when you're 60 feet up in a tree.</h1>
+      <p class="hero-sub" data-edit="hero-sub" contenteditable="true">A done-for-you system that captures every lead, follows up every quote, and fills your schedule — automatically.</p>
+      <div class="hero-rule"></div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════ PROBLEM ═════════════════════════════ -->
+  <!-- ══════════════ PROBLEM ══════════════ -->
   <section id="problem">
     <div class="section-inner">
-      <h2 class="section-heading">Here's what's costing you jobs right now.</h2>
+      <p class="section-eyebrow" data-edit="problem-eyebrow" contenteditable="true">Sound familiar?</p>
+      <h2 class="section-heading" data-edit="problem-heading" contenteditable="true">Here's what's costing you jobs right now.</h2>
       <div class="problem-grid">
-
         <div class="problem-item">
-          <p class="problem-number">01</p>
-          <p>You're running a saw 40 feet up and your phone buzzes. Someone needs a quote. By the time you get back to them that night, they've already called someone else.</p>
+          <span class="problem-num">01</span>
+          <p data-edit="problem-1" contenteditable="true">You're running a saw 40 feet up and your phone buzzes. Someone needs a quote. By the time you get back to them that night, they've already called someone else.</p>
         </div>
-
         <div class="problem-item">
-          <p class="problem-number">02</p>
-          <p>You sent a thorough quote — cleanup included, stump grinding priced separately, everything they asked. No response. You meant to follow up but the next job was already waiting.</p>
+          <span class="problem-num">02</span>
+          <p data-edit="problem-2" contenteditable="true">You sent a thorough quote — cleanup included, stump grinding priced separately, everything they asked. No response. You meant to follow up but the next job was already waiting.</p>
         </div>
-
         <div class="problem-item">
-          <p class="problem-number">03</p>
-          <p>You need 15 jobs a week to keep the crew busy. Most weeks you hit it. But you have no idea what next month looks like — and that uncertainty doesn't go away.</p>
+          <span class="problem-num">03</span>
+          <p data-edit="problem-3" contenteditable="true">You need 15 jobs a week to keep the crew busy. Most weeks you hit it. But you have no idea what next month looks like — and that uncertainty doesn't go away.</p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ════════════════════════════════ DEMO ═════════════════════════════ -->
+  <!-- ══════════════ DEMO ══════════════ -->
   <section id="demo">
     <div class="section-inner">
-      <p class="demo-label">Live Demo</p>
-      <h2 class="section-heading">Hear it for yourself.</h2>
-      <p class="demo-sub">Call this number right now. This is exactly what your customers will experience when they reach out while you're on a job.</p>
-      <div class="demo-number-wrap">
+      <p class="section-eyebrow" data-edit="demo-eyebrow" contenteditable="true">Live Demo</p>
+      <h2 class="section-heading" data-edit="demo-heading" contenteditable="true">Hear it for yourself.</h2>
+      <p class="demo-sub" data-edit="demo-sub" contenteditable="true">Call this number right now. This is exactly what your customers will experience when they reach out while you're on a job.</p>
+      <div class="demo-phone-wrap">
         <a class="demo-number" href="tel:4069267130">406-926-7130</a>
-        <p class="demo-tap-hint">Tap to call on mobile</p>
       </div>
-      <p class="demo-explainer">An AI assistant answers, takes their information, checks rough availability, and lets them know you'll be in touch. No missed leads. No one left waiting.</p>
+      <p class="demo-tap" data-edit="demo-tap" contenteditable="true">Tap to call on mobile</p>
+      <p class="demo-explainer" data-edit="demo-explainer" contenteditable="true">An AI assistant answers, takes their information, checks rough availability, and lets them know you'll be in touch. No missed leads. No one left waiting.</p>
     </div>
   </section>
 
-  <!-- ════════════════════════════════ OFFER ════════════════════════════ -->
+  <!-- ══════════════ OFFER ══════════════ -->
   <section id="offer">
     <div class="section-inner">
-      <p class="offer-label">The Offer</p>
-      <h2 class="offer-heading">The Background Office</h2>
-      <p class="offer-subheading">A complete done-for-you system built specifically for PJ's Tree Service.</p>
-
+      <div class="offer-intro">
+        <p class="section-eyebrow" data-edit="offer-eyebrow" contenteditable="true">The Offer</p>
+        <h2 class="offer-name" data-edit="offer-name" contenteditable="true">The Background Office</h2>
+        <p class="offer-tagline" data-edit="offer-tagline" contenteditable="true">A complete done-for-you system built specifically for PJ's Tree Service.</p>
+      </div>
       <div class="deliverables">
 
         <div class="deliverable">
-          <div class="deliverable-header">
-            <span class="deliverable-name">The Command Center</span>
-          </div>
-          <p class="deliverable-outcome">Every customer, every lead, every job — in one place.</p>
-          <ul class="deliverable-list">
-            <li>Single contact record for every customer and lead — name, number, address, job history</li>
-            <li>Two dedicated pipelines — new leads and past customers — nothing gets mixed or lost</li>
-            <li>Dedicated local Missoula business phone number</li>
-            <li>Both existing numbers forwarded — customers keep calling the same numbers they always have</li>
-            <li>Full visibility into where every lead and job stands at a glance</li>
+          <p class="d-name" data-edit="d1-name" contenteditable="true">The Command Center</p>
+          <p class="d-outcome" data-edit="d1-outcome" contenteditable="true">Every customer, every lead, every job — in one place.</p>
+          <ul class="d-list">
+            <li data-edit="d1-1" contenteditable="true">Single contact record for every customer and lead — name, number, address, job history</li>
+            <li data-edit="d1-2" contenteditable="true">Two dedicated pipelines — new leads and past customers — nothing gets mixed or lost</li>
+            <li data-edit="d1-3" contenteditable="true">Dedicated local Missoula business phone number</li>
+            <li data-edit="d1-4" contenteditable="true">Both existing numbers forwarded — customers keep calling the same numbers they always have</li>
+            <li data-edit="d1-5" contenteditable="true">Full visibility into where every lead and job stands at a glance</li>
           </ul>
         </div>
 
         <div class="deliverable">
-          <div class="deliverable-header">
-            <span class="deliverable-name">The Always-On Answering System</span>
-          </div>
-          <p class="deliverable-outcome">The moment someone reaches out, they get a response — even when you're 60 feet up in a tree.</p>
-          <ul class="deliverable-list">
-            <li>Instant automated response to every inbound text — fires in under 60 seconds</li>
-            <li>Missed call acknowledgment — anyone who doesn't get through receives an immediate text back</li>
-            <li>Every new contact automatically captured as a lead record — no manual data entry</li>
-            <li>Stops leads from going cold while you're on the job</li>
+          <p class="d-name" data-edit="d2-name" contenteditable="true">The Always-On Answering System</p>
+          <p class="d-outcome" data-edit="d2-outcome" contenteditable="true">The moment someone reaches out, they get a response — even when you're 60 feet up in a tree.</p>
+          <ul class="d-list">
+            <li data-edit="d2-1" contenteditable="true">Instant automated response to every inbound text — fires in under 60 seconds</li>
+            <li data-edit="d2-2" contenteditable="true">Missed call acknowledgment — anyone who doesn't get through receives an immediate text back</li>
+            <li data-edit="d2-3" contenteditable="true">Every new contact automatically captured as a lead record — no manual data entry</li>
+            <li data-edit="d2-4" contenteditable="true">Stops leads from going cold while you're on the job</li>
           </ul>
         </div>
 
         <div class="deliverable">
-          <div class="deliverable-header">
-            <span class="deliverable-name">The Follow-Up Machine</span>
-          </div>
-          <p class="deliverable-outcome">Every quote you send gets followed up automatically.</p>
-          <ul class="deliverable-list">
-            <li>Automatic follow-up sent on every unseen estimate at 48–72 hours</li>
-            <li>Professionally worded — sounds like Josh, not a robot</li>
-            <li>Stops automatically once the customer responds</li>
-            <li>Recovers jobs that would have gone to a competitor simply because no one followed up</li>
+          <p class="d-name" data-edit="d3-name" contenteditable="true">The Follow-Up Machine</p>
+          <p class="d-outcome" data-edit="d3-outcome" contenteditable="true">Every quote you send gets followed up automatically.</p>
+          <ul class="d-list">
+            <li data-edit="d3-1" contenteditable="true">Automatic follow-up sent on every unseen estimate at 48–72 hours</li>
+            <li data-edit="d3-2" contenteditable="true">Professionally worded — sounds like Josh, not a robot</li>
+            <li data-edit="d3-3" contenteditable="true">Stops automatically once the customer responds</li>
+            <li data-edit="d3-4" contenteditable="true">Recovers jobs that would have gone to a competitor simply because no one followed up</li>
           </ul>
         </div>
 
         <div class="deliverable">
-          <div class="deliverable-header">
-            <span class="deliverable-name">The Reactivation Engine</span>
-          </div>
-          <p class="deliverable-outcome">Your eight years of customers become a scheduling pipeline you can activate anytime.</p>
-          <ul class="deliverable-list">
-            <li>Full past customer list extracted, cleaned, and imported — ready to use</li>
-            <li>Reactivation campaign template built and ready to fire on demand</li>
-            <li>Fill scheduling gaps weeks out with one broadcast to people who already trust you</li>
-            <li>Seasonal and ad-hoc campaigns ready to deploy anytime</li>
+          <p class="d-name" data-edit="d4-name" contenteditable="true">The Reactivation Engine</p>
+          <p class="d-outcome" data-edit="d4-outcome" contenteditable="true">Your eight years of customers become a scheduling pipeline you can activate anytime.</p>
+          <ul class="d-list">
+            <li data-edit="d4-1" contenteditable="true">Full past customer list extracted, cleaned, and imported — ready to use</li>
+            <li data-edit="d4-2" contenteditable="true">Reactivation campaign template built and ready to fire on demand</li>
+            <li data-edit="d4-3" contenteditable="true">Fill scheduling gaps weeks out with one broadcast to people who already trust you</li>
+            <li data-edit="d4-4" contenteditable="true">Seasonal and ad-hoc campaigns ready to deploy anytime</li>
           </ul>
         </div>
 
         <div class="deliverable">
-          <div class="deliverable-header">
-            <span class="deliverable-name">The Done-With-You Setup</span>
-          </div>
-          <p class="deliverable-outcome">One call. Everything else is handled.</p>
-          <ul class="deliverable-list">
-            <li>Full system built and tested before Josh touches anything</li>
-            <li>Onboarding call — everything walked through together, nothing left unexplained</li>
-            <li>Phone forwarding configured live on the call</li>
-            <li>Contact list export handled together</li>
-            <li>System live and taking real leads within the first few days</li>
+          <p class="d-name" data-edit="d5-name" contenteditable="true">The Done-With-You Setup</p>
+          <p class="d-outcome" data-edit="d5-outcome" contenteditable="true">One call. Everything else is handled.</p>
+          <ul class="d-list">
+            <li data-edit="d5-1" contenteditable="true">Full system built and tested before Josh touches anything</li>
+            <li data-edit="d5-2" contenteditable="true">Onboarding call — everything walked through together, nothing left unexplained</li>
+            <li data-edit="d5-3" contenteditable="true">Phone forwarding configured live on the call</li>
+            <li data-edit="d5-4" contenteditable="true">Contact list export handled together</li>
+            <li data-edit="d5-5" contenteditable="true">System live and taking real leads within the first few days</li>
           </ul>
         </div>
 
@@ -521,56 +561,121 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════ PRICING ════════════════════════════ -->
+  <!-- ══════════════ PRICING ══════════════ -->
   <section id="pricing">
     <div class="section-inner">
-      <h2 class="section-heading">Simple, transparent pricing.</h2>
+      <p class="section-eyebrow" data-edit="pricing-eyebrow" contenteditable="true">Investment</p>
+      <h2 class="section-heading" data-edit="pricing-heading" contenteditable="true">Simple, transparent pricing.</h2>
 
-      <div class="pricing-grid">
+      <div class="price-cards">
         <div class="price-card">
-          <p class="price-label">Setup Fee</p>
-          <p class="price-amount">$1,500</p>
-          <p class="price-note">One time</p>
+          <p class="price-card-label" data-edit="price1-label" contenteditable="true">Setup Fee</p>
+          <p class="price-amount" data-edit="price1-amount" contenteditable="true">$1,500</p>
+          <p class="price-note" data-edit="price1-note" contenteditable="true">One time</p>
         </div>
         <div class="price-card">
-          <p class="price-label">Monthly Retainer</p>
-          <p class="price-amount">$500</p>
-          <p class="price-note">Per month</p>
+          <p class="price-card-label" data-edit="price2-label" contenteditable="true">Monthly Retainer</p>
+          <p class="price-amount" data-edit="price2-amount" contenteditable="true">$500</p>
+          <p class="price-note" data-edit="price2-note" contenteditable="true">Per month</p>
         </div>
       </div>
 
       <div class="roi-block">
-        <p>A single tree removal averages $1,825. If this system recovers one job a month that would have otherwise gone cold — one unanswered text, one estimate nobody followed up on — it pays for itself three times over before the end of the month.</p>
+        <p data-edit="roi-text" contenteditable="true">A single tree removal averages $1,825. If this system recovers one job a month that would have otherwise gone cold — one unanswered text, one estimate nobody followed up on — it pays for itself three times over before the end of the month.</p>
       </div>
 
-      <p class="guarantee-heading">Our Commitment</p>
+      <p class="guarantee-label" data-edit="guarantee-label" contenteditable="true">Our Commitment</p>
       <ul class="guarantee-list">
-        <li>System live within 10 business days of your onboarding call — or your first month is free</li>
-        <li>Every deliverable tested and confirmed working before handoff</li>
-        <li>Any issue after go-live receives a response within one business day</li>
+        <li data-edit="g1" contenteditable="true">System live within 10 business days of your onboarding call — or your first month is free</li>
+        <li data-edit="g2" contenteditable="true">Every deliverable tested and confirmed working before handoff</li>
+        <li data-edit="g3" contenteditable="true">Any issue after go-live receives a response within one business day</li>
       </ul>
     </div>
   </section>
 
-  <!-- ═════════════════════════════════ CLOSE ═══════════════════════════ -->
+  <!-- ══════════════ CLOSE ══════════════ -->
   <section id="close">
     <div class="section-inner">
-      <h2 class="section-heading">Looking forward to Tuesday.</h2>
-      <p class="close-body">We've got a call scheduled for Tuesday morning at 9:00 AM. Come with questions — that's what it's for. Everything above will be ready to walk through together, and we'll make sure the system we build is exactly right for how you work.</p>
-      <p class="close-sig">— Travis Smith, Outfox Consulting</p>
+      <h2 class="section-heading" data-edit="close-heading" contenteditable="true">Looking forward to Tuesday.</h2>
+      <p class="close-body" data-edit="close-body" contenteditable="true">We've got a call scheduled for Tuesday morning at 9:00 AM. Come with questions — that's what it's for. Everything above will be ready to walk through together, and we'll make sure the system we build is exactly right for how you work.</p>
+      <p class="close-sig" data-edit="close-sig" contenteditable="true">— Travis Smith, Outfox Consulting</p>
     </div>
   </section>
 
-  <!-- ═════════════════════════════════ FOOTER ══════════════════════════ -->
+  <!-- ══════════════ FOOTER ══════════════ -->
   <footer>
     <div class="section-inner">
-      <span class="footer-brand">Outfox Consulting</span>
+      <span class="footer-brand" data-edit="footer-brand" contenteditable="true">Outfox Consulting</span>
       <div class="footer-contact">
-        <a href="mailto:travis@outfoxconsult.com">travis@outfoxconsult.com</a><br />
-        <a href="https://outfoxconsult.com" target="_blank" rel="noopener">outfoxconsult.com</a>
+        <a href="mailto:travis@outfoxconsult.com" data-edit="footer-email" contenteditable="true">travis@outfoxconsult.com</a><br />
+        <a href="https://outfoxconsult.com" target="_blank" rel="noopener" data-edit="footer-url" contenteditable="true">outfoxconsult.com</a>
       </div>
     </div>
   </footer>
 
+  <script>
+    const STORAGE_KEY = 'pjs-proposal-edits-v1';
+
+    function saveEdits() {
+      const data = {};
+      document.querySelectorAll('[data-edit]').forEach(el => {
+        data[el.dataset.edit] = el.innerHTML;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      const confirm = document.getElementById('save-confirm');
+      confirm.style.opacity = '1';
+      setTimeout(() => { confirm.style.opacity = '0'; }, 2000);
+    }
+
+    function restoreEdits() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      try {
+        const data = JSON.parse(saved);
+        Object.entries(data).forEach(([key, value]) => {
+          const el = document.querySelector(`[data-edit="${key}"]`);
+          if (el) el.innerHTML = value;
+        });
+      } catch(e) {}
+    }
+
+    function resetEdits() {
+      if (!confirm('Reset all edits back to the original content?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+
+    function downloadHtml() {
+      // Clone the document and strip edit UI before download
+      const clone = document.documentElement.cloneNode(true);
+      // Remove edit bar
+      const bar = clone.querySelector('#edit-bar');
+      if (bar) bar.remove();
+      // Remove contenteditable and data-edit attributes
+      clone.querySelectorAll('[contenteditable]').forEach(el => {
+        el.removeAttribute('contenteditable');
+        el.removeAttribute('data-edit');
+      });
+      // Remove the script block
+      clone.querySelectorAll('script').forEach(s => s.remove());
+      const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+      const blob = new Blob([html], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'pjs-proposal-edited.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // Restore on load
+    restoreEdits();
+
+    // Auto-save on any edit
+    document.addEventListener('input', () => {
+      clearTimeout(window._autoSave);
+      window._autoSave = setTimeout(saveEdits, 1500);
+    });
+  </script>
 </body>
 </html>
